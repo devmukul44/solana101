@@ -10,10 +10,12 @@ const connection=new web3.Connection(web3.clusterApiUrl("devnet"),"confirmed");
 const from=web3.Keypair.generate();
 console.log("from wallet address");
 console.log(from);
+console.log(new web3.PublicKey(from.publicKey).toString());
 
 const to=web3.Keypair.generate();
 console.log("to wallet address");
 console.log(to);
+console.log(new web3.PublicKey(to.publicKey).toString());
 
 const getWalletBalance=async (pubk)=>{
     try{
