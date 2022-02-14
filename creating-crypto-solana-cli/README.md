@@ -1,7 +1,9 @@
 # Creating Cryptocurrency using Solana CLI
 
 ## Resources
-https://openquest.xyz/quest/create_crypto_with_solana_cli
+- https://openquest.xyz/quest/create_crypto_with_solana_cli
+- https://spl.solana.com/token
+- https://github.com/solana-labs/solana-program-library
 
 ## Docs
 
