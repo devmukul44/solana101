@@ -51,6 +51,12 @@ fn intro() {
     let c = 22.0/7.0;
     print_type_of(&c);
 
+    let s1 = "hello";
+    print_type_of(&s1);
+
+    let s2 = String::from("hello");
+    print_type_of(&s2);
+
 
     // 7 - Composite Types
     // https://www.youtube.com/watch?v=WxYjmu4RoOE&list=PLeShFtA-ZIOVo7H59Gq-LA0Go1EiUs-vk&index=7

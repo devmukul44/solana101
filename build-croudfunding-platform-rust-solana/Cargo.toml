@@ -1,0 +1,28 @@
+[package]
+name = "build-croudfunding-platform-rust-solana"
+version = "0.1.0"
+description = "Example template program written in Rust"
+authors = ["Solana Maintainers <maintainers@solana.com>"]
+repository = "https://github.com/solana-labs/solana"
+license = "Apache-2.0"
+homepage = "https://solana.com/"
+edition = "2021"
+
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[features]
+no-entrypoint = []
+
+[dependencies]
+borsh = "0.9.1"
+borsh-derive = "0.9.1"
+solana-program = "=1.9.6"
+
+[dev-dependencies]
+solana-program-test = "=1.9.6"
+solana-sdk = "=1.9.6"
+
+[lib]
+name = "crowdsource"
+crate-type = ["cdylib", "lib"]
