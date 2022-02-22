@@ -5,14 +5,15 @@ use solana_program::vote::program::ID;
 #[program]
 pub mod voting {
     use super::*;
-    // initialize fn can initialize variable if we want
+    /// initialize fn can initialize base account with public-key
     pub fn initialize(ctx: Context<StartStuffOff>, authority: Pubkey) -> ProgramResult {
         let base_account = &mut ctx.accounts.base_account;
-        base_account.authority = authority;
+        base_account.pubkey = authority;
 
         Ok(())
     }
 
+    /// Add voter publickey to base_account
     pub fn add_voters(ctx: Context<OwnerContext>, voters: Vec<Pubkey>) -> ProgramResult {
         let base_account = &mut ctx.accounts.base_account;
 
@@ -39,6 +40,13 @@ pub mod voting {
         Ok(())
     }
 
+    /// create proposal
+    ///
+    /// ctx         OwnerContext leveraging Anchor Account and Anchor Signer
+    /// name        proposal title
+    /// desc        proposal description
+    /// choices     choice vector for proposal
+    /// offset      help determine endtime(current timestamp + offset) of the proposal
     pub fn create_proposal(
         ctx: Context<OwnerContext>,
         name: String,
@@ -74,10 +82,12 @@ pub mod voting {
         Ok(())
     }
 
+    /// Vote for a proposal and choice
     pub fn vote(ctx: Context<VoteContext>, proposal_id: u32, choice_id: u32) -> ProgramResult {
         let base_account = &mut ctx.accounts.base_account;
         let msg_sender = ctx.accounts.msg_sender.key();
 
+        // check if voter can vote for the proposal
         for voter in base_account.voters.iter() {
             if voter.address == msg_sender {
                 assert!(voter.is_voter, "vote:: only voters can vote");
@@ -153,12 +163,16 @@ pub mod voting {
     }
 }
 
+/// Initializer
 #[derive(Accounts)]
 pub struct StartStuffOff<'info> {
+    // Anchor Lang Account Initialization
     #[account(init, payer = user, space = 6942)]
     pub base_account: Account<'info, BaseAccount>,
+    // anchor lang Signer
     #[account(mut)]
     pub user: Signer<'info>,
+    // anchor lang System Program
     pub system_program: Program<'info, System>,
 }
 
@@ -169,7 +183,7 @@ pub struct VoteContext<'info> {
     pub msg_sender: Signer<'info>,
 }
 
-// Context for only owner functions
+/// Context for only owner functions
 #[derive(Accounts)]
 pub struct OwnerContext<'info> {
     #[account(mut, has_one = authority)]
@@ -177,6 +191,7 @@ pub struct OwnerContext<'info> {
     pub authority: Signer<'info>,
 }
 
+/// Proposal Choice
 #[derive(Debug, Clone, AnchorSerialize, AnchorDeserialize)]
 pub struct Choice {
     pub id: u128,
@@ -184,6 +199,13 @@ pub struct Choice {
     pub votes: u128,
 }
 
+/// Proposal
+///
+/// id              proposal id
+/// proposal        proposal title
+/// description     proposal description
+/// choices         proposal Choices
+/// end_time_stamp  proposal end time
 #[derive(Debug, Clone, AnchorSerialize, AnchorDeserialize)]
 pub struct Proposal {
     pub id: u128,
@@ -217,10 +239,18 @@ pub struct Votes {
     pub votes_util: Vec<VotesUtils>,
 }
 
+/// BaseAccount
+/// Type: Anchor Account
+///
+/// pubkey              owner PubKey
+/// voters              Voters vector
+/// proposals           ProposalArray vector
+/// next_proposal_id    next_proposal_id
+/// votes               Votes vector
 #[account]
 pub struct BaseAccount {
     // For owner check
-    pub authority: Pubkey,
+    pub pubkey: Pubkey,
 
     // Contract variables
     pub voters: Vec<Voters>,
