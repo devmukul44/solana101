@@ -17,17 +17,16 @@ solana config get
 <img width="399" alt="image" src="https://user-images.githubusercontent.com/15700993/154329737-e88f4de0-befb-4d44-9a35-230d88ae5e91.png">
 
 
-```
-solana balance
-```
-<img width="159" alt="image" src="https://user-images.githubusercontent.com/15700993/154329574-d7eb8119-b77c-42d4-b40f-aca1f78ca3a6.png">
-
-
  ```
  solana-test-validator
  ```
 
 <img width="964" alt="image" src="https://user-images.githubusercontent.com/15700993/154328841-24beb862-ffb7-445c-84fd-1a29b91510c8.png">
+
+```
+solana balance
+```
+<img width="159" alt="image" src="https://user-images.githubusercontent.com/15700993/154329574-d7eb8119-b77c-42d4-b40f-aca1f78ca3a6.png">
 
 
 building bpf for project
@@ -36,7 +35,8 @@ building bpf for project
 cargo build-bpf --manifest-path=./Cargo.toml
 ```
 
-<img width="1741" alt="image" src="https://user-images.githubusercontent.com/15700993/154329145-b2ea4430-0407-4289-856a-a2a3dbab4990.png">
+<img width="1740" alt="image" src="https://user-images.githubusercontent.com/15700993/155053749-70605ea6-231b-4fa2-958b-b2e2763725d6.png">
+
 
 deploying program to solana blockchain
 
@@ -44,4 +44,5 @@ deploying program to solana blockchain
 solana program deploy target/deploy/voting.so 
 ```
 
-<img width="463" alt="image" src="https://user-images.githubusercontent.com/15700993/154329325-0ba5a89f-6d4a-4078-bae0-36ae57ff7cc6.png">
+<img width="471" alt="image" src="https://user-images.githubusercontent.com/15700993/155053703-873e8f2b-7db2-49a1-a18f-8b453d4d850e.png">
+
