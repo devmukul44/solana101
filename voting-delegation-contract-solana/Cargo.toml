@@ -1,0 +1,26 @@
+[package]
+name = "voting-delegation-contract-solana"
+version = "0.1.0"
+edition = "2021"
+description = "Example voting delegation program written in Rust / Anchor"
+authors = ["Solana Maintainers <maintainers@solana.com>"]
+repository = "https://github.com/solana-labs/solana"
+license = "Apache-2.0"
+homepage = "https://solana.com/"
+
+[features]
+no-entrypoint = []
+
+[dependencies]
+borsh = "0.9.1"
+borsh-derive = "0.9.1"
+solana-program = "^1.8.0"
+anchor-lang = "0.18.0"
+
+[dev-dependencies]
+solana-program-test = "^1.8.0"
+solana-sdk = "^1.8.0"
+
+[lib]
+name = "voting"
+crate-type = ["cdylib", "lib"]
